@@ -24,23 +24,23 @@ use crate::ValidationError;
 /// ```
 pub fn validate(input: &str) -> Result<(), ValidationError> {
     let input = input.trim().to_uppercase();
-    
+
     if !input.starts_with("EC") {
         return Err(ValidationError::InvalidFormat);
     }
-    
+
     if input.len() != 24 {
         return Err(ValidationError::InvalidLength);
     }
-    
+
     if !input.chars().all(|c| c.is_ascii_alphanumeric()) {
         return Err(ValidationError::InvalidFormat);
     }
-    
+
     let rearranged: String = input[4..].to_string() + &input[..4];
-    
+
     let mut remainder = 0u32;
-    
+
     for c in rearranged.chars() {
         if c.is_ascii_digit() {
             let digit = c as u32 - '0' as u32;
@@ -58,11 +58,11 @@ pub fn validate(input: &str) -> Result<(), ValidationError> {
             }
         }
     }
-    
+
     if remainder != 1 {
         return Err(ValidationError::InvalidCheckDigit);
     }
-    
+
     Ok(())
 }
 
@@ -106,14 +106,14 @@ pub fn format(input: &str) -> Option<String> {
         let input = input.trim().to_uppercase();
         let chars: Vec<char> = input.chars().collect();
         let mut result = String::new();
-        
+
         for (i, c) in chars.iter().enumerate() {
             if i > 0 && i % 4 == 0 {
                 result.push(' ');
             }
             result.push(*c);
         }
-        
+
         Some(result)
     } else {
         None
@@ -132,17 +132,26 @@ mod tests {
 
     #[test]
     fn wrong_country() {
-        assert_eq!(validate("XX1234567890123456789012"), Err(ValidationError::InvalidFormat));
+        assert_eq!(
+            validate("XX1234567890123456789012"),
+            Err(ValidationError::InvalidFormat)
+        );
     }
 
     #[test]
     fn wrong_length() {
-        assert_eq!(validate("EC12345678901234567890123"), Err(ValidationError::InvalidLength));
+        assert_eq!(
+            validate("EC12345678901234567890123"),
+            Err(ValidationError::InvalidLength)
+        );
     }
 
     #[test]
     fn wrong_check_digit() {
-        assert_eq!(validate("EC9912345678901234567890"), Err(ValidationError::InvalidCheckDigit));
+        assert_eq!(
+            validate("EC9912345678901234567890"),
+            Err(ValidationError::InvalidCheckDigit)
+        );
     }
 
     #[test]

@@ -121,7 +121,11 @@ fn validate_juridical(input: &str) -> Result<(), ValidationError> {
         sum += digit * weights[i];
     }
 
-    let computed_check = if sum.is_multiple_of(11) { 0 } else { 11 - (sum % 11) };
+    let computed_check = if sum.is_multiple_of(11) {
+        0
+    } else {
+        11 - (sum % 11)
+    };
 
     if computed_check == 10 {
         return Err(ValidationError::InvalidCheckDigit);
@@ -155,7 +159,11 @@ fn validate_public(input: &str) -> Result<(), ValidationError> {
         sum += digit * weights[i];
     }
 
-    let remainder = if sum.is_multiple_of(11) { 0 } else { 11 - (sum % 11) };
+    let remainder = if sum.is_multiple_of(11) {
+        0
+    } else {
+        11 - (sum % 11)
+    };
 
     if remainder != check_digit {
         return Err(ValidationError::InvalidCheckDigit);
@@ -222,4 +230,3 @@ mod tests {
         );
     }
 }
-

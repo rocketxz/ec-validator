@@ -1,5 +1,5 @@
+use crate::{cedula, iban, ruc};
 use wasm_bindgen::prelude::*;
-use crate::{cedula, ruc, iban};
 
 #[wasm_bindgen]
 pub fn validate_cedula(input: &str) -> bool {
@@ -10,15 +10,17 @@ pub fn validate_cedula(input: &str) -> bool {
 pub fn validate_ruc(input: &str) -> JsValue {
     let is_valid = ruc::validate(input).is_ok();
     let ruc_type_opt = if is_valid { ruc::ruc_type(input) } else { None };
-    
+
     let type_str = if let Some(t) = ruc_type_opt {
         match t {
             crate::ruc::RucType::NaturalPerson => "natural_person",
-            crate::ruc::RucType::JuridicalEntity => "juridical_entity", 
+            crate::ruc::RucType::JuridicalEntity => "juridical_entity",
             crate::ruc::RucType::PublicEntity => "public_entity",
         }
-    } else { "" };
-    
+    } else {
+        ""
+    };
+
     let obj = js_sys::Object::new();
     js_sys::Reflect::set(&obj, &"valid".into(), &is_valid.into()).unwrap();
     js_sys::Reflect::set(&obj, &"type".into(), &type_str.into()).unwrap();
