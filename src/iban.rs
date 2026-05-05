@@ -51,7 +51,7 @@ pub fn validate(input: &str) -> Result<(), ValidationError> {
             }
         } else {
             let value = (c as u32) - ('A' as u32) + 10;
-            if value >= 10 && value <= 35 {
+            if (10..=35).contains(&value) {
                 remainder = (remainder * 100 + value) % 97;
             } else {
                 return Err(ValidationError::InvalidFormat);

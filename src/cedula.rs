@@ -51,11 +51,11 @@ pub fn validate(input: &str) -> Result<(), ValidationError> {
     let digits: Vec<u32> = input.chars().map(|c| c.to_digit(10).unwrap()).collect();
     
     let mut sum = 0u32;
-    for i in 0..9 {
+    for (i, &digit) in digits.iter().enumerate().take(9) {
         let product = if i % 2 == 0 {
-            digits[i] * 2
+            digit * 2
         } else {
-            digits[i]
+            digit
         };
         if product >= 10 {
             sum += product - 9;
@@ -64,7 +64,7 @@ pub fn validate(input: &str) -> Result<(), ValidationError> {
         }
     }
     
-    let remainder = if sum % 10 == 0 {
+    let remainder = if sum.is_multiple_of(10) {
         0
     } else {
         10 - (sum % 10)
