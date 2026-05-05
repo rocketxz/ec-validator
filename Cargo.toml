@@ -1,0 +1,32 @@
+[package]
+name = "ec-validator"
+version = "0.1.0"
+edition = "2021"
+description = "High-performance validation for Ecuadorian government IDs (cédula, RUC) and financial data (IBAN)"
+license = "MIT"
+repository = "https://github.com/anomalyco/ec-validator"
+documentation = "https://docs.rs/ec-validator"
+keywords = ["ecuador", "cedula", "ruc", "iban", "sri"]
+categories = ["data-structures", "no-std"]
+readme = "README.md"
+
+[features]
+default = []
+serde = ["serde/derive"]
+wasm = ["wasm-bindgen", "js-sys"]
+
+[dependencies]
+serde = { version = "1", features = ["derive"], optional = true }
+wasm-bindgen = { version = "0.2", optional = true }
+js-sys = { version = "0.3", optional = true }
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dev-dependencies]
+proptest = "1"
+criterion = "0.5"
+
+[[bench]]
+name = "validators"
+harness = false
