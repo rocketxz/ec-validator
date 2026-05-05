@@ -1,7 +1,7 @@
 # ec-validator
 
 [![crates.io](https://img.shields.io/crates/v/ec-validator)](https://crates.io/crates/ec-validator)
-[![docs.rs](https://docs.rs/ec-validator/badge.svg)](https://docs.rs/ec-validator)
+[![docs.rs](https://docs.rs/ec-validator/badge.svg)](https://docs.rs/ec-validator/latest/ec_validator/)
 [![CI](https://github.com/rocketxz/ec-validator/workflows/CI/badge.svg)](https://github.com/rocketxz/ec-validator/actions)
 
 High-performance validation library for Ecuadorian government IDs and financial data.
