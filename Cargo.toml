@@ -1,6 +1,6 @@
 [package]
 name = "ec-validator"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "High-performance validation for Ecuadorian government IDs (cédula, RUC) and financial data (IBAN)"
 license = "MIT"
