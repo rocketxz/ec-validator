@@ -4,8 +4,8 @@
 [![docs.rs](https://docs.rs/ec-validator/badge.svg)](https://docs.rs/ec-validator)
 [![CI](https://github.com/rocketxz/ec-validator/workflows/CI/badge.svg)](https://github.com/rocketxz/ec-validator/actions)
 [![Made in Ecuador](https://img.shields.io/badge/Made_in-Ecuador-FF6F00?styleflat&logo=flag)](https://en.wikipedia.org/wiki/Ecuador)
-
-> ⚠️ Ecuador does not currently use IBAN in practice.
+> [!NOTE]
+> Ecuador does not currently use IBAN in practice.
 > Banks use CCI instead. IBAN support is included for ISO compliance.
 
 High-performance validation for Ecuadorian government IDs (cédula, RUC) and financial data (IBAN).
